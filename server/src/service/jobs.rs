@@ -45,7 +45,7 @@ impl Service {
             .map(|s| s.to_owned())
             .collect();
         if command_with_args.is_empty() {
-            return Err(Error::InvalidArguement("COMMAND NOT VALID".to_string()));
+            return Err(Error::InvalidArgument("COMMAND NOT VALID".to_string()));
         }
 
         let command = command_with_args.remove(0);

@@ -1,12 +1,12 @@
 use serde::de::DeserializeOwned;
 use warp::Filter;
 
-//mod error;
-//mod state;
+mod error;
+mod state;
 
 pub mod routes;
-//pub use error::handle_error;
-//pub use state::{with_state, AppState};
+pub use error::handle_error;
+pub use state::{with_state, AppState};
 
 // Decode request in 2 steps here and in api/routes/job.rs create_job
 

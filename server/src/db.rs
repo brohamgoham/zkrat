@@ -21,7 +21,7 @@ pub async fn migrate(db: &Pool<Postgres>) -> Result<(), crate::Error> {
     match sqlx::migrate!("./db/migrations").run(db).await {
         Ok(_) => Ok(()),
         Err(err) => {
-            error!("db::migrate: migrating: {}" &err);
+            error!("db::migrate: migrating: {}", &err);
             Err(err)
         }
     }?;

@@ -51,7 +51,7 @@ pub async fn handle_error(rejection: Rejection) -> std::result::Result<impl Repl
         err = crate::Error::InvalidArgument("Invalid HTTP METHOD BOII".to_string());
     } else if let Some(e) = rejection.find::<crate::Error>() {
         status = match e {
-            crate::Error::InvalidArguement(_) => StatusCode::BAD_REQUEST, // 400
+            crate::Error::InvalidArgument(_) => StatusCode::BAD_REQUEST, // 400
 
             crate::Error::NotFound(_) => StatusCode::NOT_FOUND, // 404
             crate::Error::Internal(_) => StatusCode::INTERNAL_SERVER_ERROR // 500
