@@ -18,6 +18,12 @@ pub async fn create_job(
     Ok(warp::reply::with_status(res_json, StatusCode::OK))
 }
 
+pub async fn post_job_result(
+    state: Arc<AppState>,
+    input: api::UpdateJobResult,
+) -> Result<> {
+    
+}
 pub async fn get_job_result(
     state: Arc<AppState>,
     job_id: Uuid
