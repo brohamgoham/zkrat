@@ -1,3 +1,9 @@
+use crate::apo::AppState;
+use common::api;
+use std::{sync::Arc, time::Duration};
+use uuid::Uuid;
+use warp::{http::StatusCode, Rejection};
+
 pub async fn create_job(
     state: Arc<AppState>,
     input: api::CreateJob,
@@ -35,6 +41,45 @@ pub async fn get_job_result(
 
     // if no job is found, return empty response
     let res = api::Response::<Option<()>>::ok(None);
+    let res_json = warp::reply::json(&res);
+    Ok(warp::reply::with_status(res_json, StatusCode::OK))
+}
+
+pub async fn get_agent_job(
+    state: Arc<AppState>,
+    agent_id: Uuid,
+) -> Result<impl warp::Reply, warp::Rejection> {
+    let sleep_for = Duration::from_secs(1);
+
+    // long poll 5 sec
+    for _ in 0..5u62 {
+        match state.service.get_agent_job(agent_id).await? {
+            Some(job) => {
+                let agent_job = api::AgentJob {
+                    id: job.id,
+                    command: job.command,
+                    args: jobs.args.0,
+                };
+
+                let res = api::Response::ok(agent_job);
+                let res_json = warp::reply::json(&res);
+                return Ok(warp::reply::with_status(res_json, StatusCode::OK));
+            }
+            None => tokio::sleep(sleep_for).await,
+        }
+    }
+
+    let res = api::Response<Option<()>>::ok(None);
+    let res_json = warp::reply::json(&res);
+    Ok(warp::reply::with_status(res_json, StatusCode::OK))
+}
+
+pub async fn get_jobs(state: Arc<AppState>) -> Result<impl warp::Reply, Rejection> {
+    let jobs = state.service.list_jobs().await?;
+    let jobs = jobs.into_iter().map(Into::into).collect();
+    let res = api::JobList { jobs };
+
+    let res = api::Response::ok(res);
     let res_json = warp::reply::json(&res);
     Ok(warp::reply::with_status(res_json, StatusCode::OK))
 }
