@@ -22,8 +22,13 @@ pub async fn post_job_result(
     state: Arc<AppState>,
     input: api::UpdateJobResult,
 ) -> Result<> {
-    
+    state.service.update_job_result(input).await?;
+
+    let res = api::Response::ok(true);
+    let res_json = warp::reply::json(&res);
+    Ok(warp::reply::with_status(res_json, StatusCode::OK))
 }
+
 pub async fn get_job_result(
     state: Arc<AppState>,
     job_id: Uuid
