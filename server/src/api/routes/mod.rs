@@ -2,7 +2,7 @@ use agents::{get_agents, post_agents};
 use index::index;
 use jobs::{
     create_job, 
-    get_agents_job, 
+    get_agent_job, 
     get_job_result, 
     get_jobs, 
     post_job_result};
@@ -39,9 +39,8 @@ pub fn routes(app_state: Arc<AppState>) -> impl Filter<Extract = impl warp::Repl
         .and(warp::path::param())
         .and(warp::path("result"))
         .and(warp::path::end())
-        .and(warp::post())
-        .and(super::json_body())
-        .and_then(post_job_result);
+        .and(warp::get())
+        .and_then(get_job_result);
     // GET /api/agents
     let get_agents = api_with_state
         .clone()
@@ -54,7 +53,7 @@ pub fn routes(app_state: Arc<AppState>) -> impl Filter<Extract = impl warp::Repl
     let get_agents_job = api_with_state
         .clone()
         .and(warp::path("agents"))
-        .amd(warp::path::param())
+        .and(warp::path::param())
         .and(warp::path("job"))
         .and(warp::path::end())
         .and(warp::get())
@@ -76,7 +75,15 @@ pub fn routes(app_state: Arc<AppState>) -> impl Filter<Extract = impl warp::Repl
         .and(warp::post())
         .and_then(post_agents);
 
-
+    // POST /api/jobs/result
+    let post_job_result = api_with_state
+        .clone()
+        .and(warp::path("jobs"))
+        .and(warp::path("result"))
+        .and(warp::path::end())
+        .and(warp::post())
+        .and(super::json_body())
+        .and_then(post_job_result);
 
     let routes = index
         .or(get_jobs)

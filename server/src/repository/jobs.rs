@@ -29,7 +29,7 @@ impl Repository {
                 }
     }
 
-    pub async fn uodate_job(&self, db: &Pool<Postgres>, job: &Job) -> Result<(), Error> {
+    pub async fn update_job(&self, db: &Pool<Postgres>, job: &Job) -> Result<(), Error> {
         const QUERY: &str = "UPDATE jobs
             SET executed_at = $1, output = $2
             WHERE id = $3";
@@ -52,7 +52,7 @@ impl Repository {
     pub async fn find_job_by_id(&self, db: &Pool<Postgres>, job_id: Uuid) -> Result<Job, Error> {
         const QUERY: &str = "SELECT * FROM jobs WHERE id = $1";
 
-        match sqlx::query(QUERY)
+        match sqlx::query_as::<_, Job>(QUERY)
             .bind(job_id)
             .fetch_optional(db)
             .await
@@ -71,7 +71,7 @@ impl Repository {
             WHERE agent_id = $1 AND output IS NULL
             LIMIT 1";
 
-            match sqlx::query(QUERY)
+            match sqlx::query_as::<_, Job>(QUERY)
                 .bind(agent_id)
                 .fetch_optional(db)
                 .await

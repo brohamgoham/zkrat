@@ -1,4 +1,4 @@
-//use common::api;
+use common::api;
 use std::{collections::HashMap, convert::Infallible};
 use warp::http::StatusCode;
 use warp::{Rejection, Reply};
@@ -10,17 +10,17 @@ const CODE_INTERNAL: &str = "INTERNAL";
 impl std::convert::Into<api::Error> for crate::Error {
     fn into(self) -> api::Error {
         match self {
-            crate::Error::NotFounf(err) => {
+            crate::Error::NotFound(err) => {
                 let mut extensions = HashMap::new();
                 extensions.insert(EXTENSION_KEY_CODE.into(), CODE_NOT_FOUND.into());
 
                 api::Error {
                     message: err.to_string(),
-                    extension: Some(extensions),
+                    extensions: Some(extensions),
                 }
             }
             crate::Error::Internal(_) => {
-                let mut extensions = HashMap::new();
+                let mut extensions: HashMap<String, String> = HashMap::new();
                 extensions.insert(EXTENSION_KEY_CODE.into(), CODE_INTERNAL.into());
 
               api::Error {
@@ -42,7 +42,7 @@ pub async fn handle_error(rejection: Rejection) -> std::result::Result<impl Repl
 
     if rejection.is_not_found() {
         status = StatusCode::NOT_FOUND;
-        err = crate::Error::NotFounf("Route not found".to_string());
+        err = crate::Error::NotFound("Route not found".to_string());
     } else if let Some(_) = rejection.find::<warp::filters::body::BodyDeserializeError>() {
         status = StatusCode::BAD_REQUEST;
         err = crate::Error::InvalidArgument("Invalid Body".to_string());

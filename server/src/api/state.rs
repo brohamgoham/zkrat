@@ -17,6 +17,6 @@ pub fn with_state(
     state: Arc<AppState>,
 ) -> impl Filter<Extract = (Arc<AppState>,), Error = std::convert::Infallible> + Clone {
     {
-    warp::any().map(move || state())
+    warp::any().map(move || state.clone())
     } 
 }

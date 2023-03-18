@@ -15,7 +15,7 @@ impl Service {
     }
 
     pub async fn get_agent_job(&self, agent_id: Uuid) -> Result<Option<Job>, Error> {
-        let mut agent = self.repo.find_agent_by_id(&self.db, agent_id).await?;
+        let mut agent = self.repo.find_agent_by_id(&self.db, &agent_id).await?;
         
         agent.last_seen_at = Utc::now();
         
@@ -34,7 +34,7 @@ impl Service {
 
         job.executed_at = Some(Utc::now());
         job.output = Some(input.output);
-        self.repo.update_job(self.db, &job).await
+        self.repo.update_job(&self.db, &job).await
     }
 
     pub async fn create_job(&self, input: CreateJob) -> Result<Job, Error> {

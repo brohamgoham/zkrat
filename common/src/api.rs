@@ -39,10 +39,10 @@ pub struct AgentRegistered {
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct CreateJob (
+pub struct CreateJob {
     pub agent_id: Uuid,
     pub command: String,
-)
+}
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Job {
@@ -71,8 +71,8 @@ pub struct AgentJob {
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Agent {
     pub id: Uuid,
-    pub command: String,
-    pub last_seen_at: Vec<String>,
+    pub created_at: DateTime<Utc>,
+    pub last_seen_at: DateTime<Utc>,
 }
 
 
@@ -83,5 +83,5 @@ pub struct AgentList {
 
 #[derive(Debug, Serialize, Clone, Deserialize)]
 pub struct JobList {
-    pub jobs: Vec<Jobs>,
+    pub jobs: Vec<Job>,
 }

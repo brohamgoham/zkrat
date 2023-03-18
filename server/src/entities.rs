@@ -40,7 +40,7 @@ impl Into<api::Agent> for Agent {
         api::Agent {
             id: self.id,
             created_at: self.created_at,
-            last_seen_at: self.last_seen_at
+            last_seen_at: self.last_seen_at,
         }
     }
 }
