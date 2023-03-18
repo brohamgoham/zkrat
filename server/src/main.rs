@@ -13,7 +13,6 @@ pub use error::Error;
 pub use repository::Repository;
 pub use service::Service;
 
-
 #[tokio::main(flavor = "multi_thread")]
 async fn main() -> Result<(), anyhow::Error> {
     std::env::set_var("RUST_LOG", "server=info");
@@ -42,4 +41,3 @@ async fn main() -> Result<(), anyhow::Error> {
 
     Ok(())
 }
- 

@@ -1,7 +1,7 @@
 use thiserror::Error;
 
 /**
-First lets creat an Internal(String) variant of errors we dont want or 
+First lets creat an Internal(String) variant of errors we dont want or
 cannot handle gracefully
 */
 #[derive(Error, Debug, Clone)]
@@ -11,7 +11,7 @@ pub enum Error {
     #[error("{0}")]
     NotFound(String),
     #[error("{0}")]
-    InvalidArgument(String)
+    InvalidArgument(String),
 }
 
 impl warp::reject::Reject for Error {}
@@ -30,9 +30,9 @@ impl std::convert::From<std::num::ParseIntError> for Error {
 
 impl std::convert::From<sqlx::Error> for Error {
     fn from(err: sqlx::Error) -> Self {
-       match err {
-        sqlx::Error::RowNotFound => Error::NotFound("Not Found".into()),
-        _ => Error::Internal(err.to_string()),
-       }
+        match err {
+            sqlx::Error::RowNotFound => Error::NotFound("Not Found".into()),
+            _ => Error::Internal(err.to_string()),
+        }
     }
 }

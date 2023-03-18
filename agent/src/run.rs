@@ -12,7 +12,6 @@ pub fn run(api_client: &ureq::Agent, agent_id: Uuid) -> ! {
         let server_res = match api_client.get(get_job_route.as_str()).call() {
             Ok(res) => res,
             Err(err) => {
-
                 log::debug!("Error getting job from server: {}", err);
                 sleep(sleep_for);
                 continue;
@@ -46,18 +45,18 @@ pub fn run(api_client: &ureq::Agent, agent_id: Uuid) -> ! {
         match api_client
             .post(post_job_result_route.as_str())
             .send_json(ureq::json!(job_result))
-            {
-                Ok(_) => {}
-                Err(err) => {
-                    log::debug!("error sending jobs result back:{}", err);
-                }
-            };
+        {
+            Ok(_) => {}
+            Err(err) => {
+                log::debug!("error sending jobs result back:{}", err);
+            }
+        };
     }
 }
 
 fn execute_command(command: String, args: Vec<String>) -> String {
     let mut ret = String::new();
-    
+
     let output = match Command::new(command).args(&args).output() {
         Ok(output) => output,
         Err(err) => {
@@ -70,8 +69,8 @@ fn execute_command(command: String, args: Vec<String>) -> String {
         Ok(stdout) => stdout,
         Err(err) => {
             log::debug!("Error converting commands output to string: {}", err);
-            return ret
+            return ret;
         }
     };
-    return ret
+    return ret;
 }

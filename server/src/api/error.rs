@@ -23,7 +23,7 @@ impl std::convert::Into<api::Error> for crate::Error {
                 let mut extensions: HashMap<String, String> = HashMap::new();
                 extensions.insert(EXTENSION_KEY_CODE.into(), CODE_INTERNAL.into());
 
-              api::Error {
+                api::Error {
                     message: self.to_string(),
                     extensions: None,
                 }
@@ -54,8 +54,7 @@ pub async fn handle_error(rejection: Rejection) -> std::result::Result<impl Repl
             crate::Error::InvalidArgument(_) => StatusCode::BAD_REQUEST, // 400
 
             crate::Error::NotFound(_) => StatusCode::NOT_FOUND, // 404
-            crate::Error::Internal(_) => StatusCode::INTERNAL_SERVER_ERROR // 500
-
+            crate::Error::Internal(_) => StatusCode::INTERNAL_SERVER_ERROR, // 500
         };
         err = e.to_owned();
     } else {

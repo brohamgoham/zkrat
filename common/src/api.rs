@@ -21,7 +21,7 @@ impl<T: Serialize> Response<T> {
     pub fn err(err: Error) -> Response<()> {
         return Response::<()> {
             data: None,
-            error: Some(err.into())
+            error: Some(err.into()),
         };
     }
 }
@@ -30,7 +30,7 @@ impl<T: Serialize> Response<T> {
 pub struct Error {
     pub message: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub extensions: Option<HashMap<String, String>>
+    pub extensions: Option<HashMap<String, String>>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -55,18 +55,17 @@ pub struct Job {
     pub agent_id: Uuid,
 }
 
-
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct UpdateJobResult {
     pub job_id: Uuid,
-    pub output: String
+    pub output: String,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct AgentJob {
     pub id: Uuid,
     pub command: String,
-    pub args: Vec<String>
+    pub args: Vec<String>,
 }
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Agent {
@@ -74,7 +73,6 @@ pub struct Agent {
     pub created_at: DateTime<Utc>,
     pub last_seen_at: DateTime<Utc>,
 }
-
 
 #[derive(Debug, Serialize, Clone, Deserialize)]
 pub struct AgentList {

@@ -16,9 +16,9 @@ impl Service {
 
     pub async fn get_agent_job(&self, agent_id: Uuid) -> Result<Option<Job>, Error> {
         let mut agent = self.repo.find_agent_by_id(&self.db, &agent_id).await?;
-        
+
         agent.last_seen_at = Utc::now();
-        
+
         //ignor result as an error is not important rn
         let _ = self.repo.update_agent(&self.db, &agent).await;
 
@@ -65,4 +65,4 @@ impl Service {
 
         Ok(new_job)
     }
-} 
+}

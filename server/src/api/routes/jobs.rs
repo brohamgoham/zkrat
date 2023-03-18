@@ -31,7 +31,7 @@ pub async fn post_job_result(
 
 pub async fn get_job_result(
     state: Arc<AppState>,
-    job_id: Uuid
+    job_id: Uuid,
 ) -> Result<impl warp::Reply, warp::Rejection> {
     let sleep_for = Duration::from_secs(1);
 
@@ -45,7 +45,7 @@ pub async fn get_job_result(
                 let res_json = warp::reply::json(&res);
                 return Ok(warp::reply::with_status(res_json, StatusCode::OK));
             }
-            // tokio time sleep use allows an active conn to barely use resources when idle 
+            // tokio time sleep use allows an active conn to barely use resources when idle
             None => tokio::time::sleep(sleep_for).await,
         }
     }

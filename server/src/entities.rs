@@ -32,7 +32,7 @@ impl Into<api::Job> for Job {
 pub struct Agent {
     pub id: Uuid,
     pub created_at: DateTime<Utc>,
-    pub last_seen_at: DateTime<Utc>
+    pub last_seen_at: DateTime<Utc>,
 }
 
 impl Into<api::Agent> for Agent {

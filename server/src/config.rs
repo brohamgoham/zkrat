@@ -16,11 +16,10 @@ impl Config {
 
         let port = std::env::var(ENV_PORT)
             .ok()
-            .map_or(Ok(DEFAULT_PORT), |env_val| env_val.parse::<>())?;
-        
-        let database_url = 
-            std::env::var(ENV_DATABASE_URL).map_err(|_| env_not_found(ENV_DATABASE_URL))?;
+            .map_or(Ok(DEFAULT_PORT), |env_val| env_val.parse())?;
 
+        let database_url =
+            std::env::var(ENV_DATABASE_URL).map_err(|_| env_not_found(ENV_DATABASE_URL))?;
 
         Ok(Config { port, database_url })
     }
