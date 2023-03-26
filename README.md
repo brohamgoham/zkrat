@@ -32,7 +32,7 @@ Long polling is extremly efficient in Rust, thanks to async, very few resources 
 - diesel
 - tokio-postgres
 - **sqlx**
-
+----because its lightweight and fast!
 
 ## Presentation Layer aka THE API!!!!!!!
 -----------------------------------------
