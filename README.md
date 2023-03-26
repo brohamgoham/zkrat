@@ -32,7 +32,7 @@ Long polling is extremly efficient in Rust, thanks to async, very few resources 
 - diesel
 - tokio-postgres
 - **sqlx**
-
+----because its lightweight and fast!
 
 ## Presentation Layer aka THE API!!!!!!!
 -----------------------------------------
@@ -50,3 +50,6 @@ Now you are going to learn in rust lang how to do
 - Presentation Layer
 - Service Layer
 - Repository Layer 
+
+
+- By Mohammed Maali for cyber security experts
