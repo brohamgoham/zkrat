@@ -33,3 +33,9 @@ fmt:
 .PHONY: check
 check:
 	cargo check
+
+
+.PHONY: check2
+check2:
+	cargo c
+
