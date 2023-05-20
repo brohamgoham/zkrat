@@ -9,7 +9,7 @@ mod get_job_result;
 #[derive(Debug)]
 pub struct Client {
     pub http_client: reqwest::blocking::Client,
-    server_url: String,
+    pub server_url: String,
 }
 
 impl Client {

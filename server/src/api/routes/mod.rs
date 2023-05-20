@@ -1,3 +1,4 @@
+#[warn(opaque_hidden_inferred_bound)]
 use agents::{get_agents, post_agents};
 use index::index;
 use jobs::{create_job, get_agent_job, get_job_result, get_jobs, post_job_result};

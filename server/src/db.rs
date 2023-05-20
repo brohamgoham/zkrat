@@ -12,7 +12,7 @@ pub async fn connect(database_url: &str) -> Result<Pool<Postgres>, crate::Error>
         .connect(database_url)
         .await
         .map_err(|err| {
-            error!("db: connecting to you DB :) {}", err);
+            error!("😈😈😈😈😈😈db: connecting to you DB :) 😈😈: {}", err);
             err.into()
         })
 }
