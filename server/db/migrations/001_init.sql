@@ -5,11 +5,11 @@ CREATE TABLE agents (
 );
 
 CREATE TABLE jobs (
-    id UUID PRIMARY KEY
+    id UUID PRIMARY KEY,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     executed_at TIMESTAMP WITH TIME ZONE,
     command TEXT NOT NULL,
-    args JSONB NOT NULL,
+    args JSON NOT NULL,
     output TEXT,
 
     agent_id UUID NOT NULL REFERENCES agents(id) ON DELETE CASCADE

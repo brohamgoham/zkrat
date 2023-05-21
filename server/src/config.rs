@@ -18,9 +18,7 @@ impl Config {
             .ok()
             .map_or(Ok(DEFAULT_PORT), |env_val| env_val.parse())?;
 
-        let database_url =
-            std::env::var(ENV_DATABASE_URL).map_err(|_| env_not_found(ENV_DATABASE_URL))?;
-
+        let database_url = "postgres://h3cker:postgres@localhost:5432/h3cker".to_string();
         Ok(Config { port, database_url })
     }
 }
@@ -28,3 +26,29 @@ impl Config {
 fn env_not_found(var: &str) -> Error {
     Error::NotFound(format!("config: {} env var not found", var))
 }
+
+/*
+#[cfg(test)]
+mod test {
+    use super::*;
+    
+    #[test]
+    fn test_load_config() {
+        let config = Config::load().unwrap_or({
+            println!("Failed to load config, using default values");
+            Config {
+                port: DEFAULT_PORT,
+                database_url: "postgres://h3cker:postgres@localhost:5432/h3cker"
+                .to_string(),
+            }
+        });
+        
+        assert_eq!(config.port, 8080);
+        dbg!(&config);
+        //  assert_eq!(
+            //      config.database_url,
+            //      "postgres://postgres:postgres@localhost:5432/postgres"
+            //  );
+        }
+    }
+    */

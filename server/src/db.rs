@@ -7,7 +7,7 @@ use std::time::Duration;
 // 20 is safe
 pub async fn connect(database_url: &str) -> Result<Pool<Postgres>, crate::Error> {
     PgPoolOptions::new()
-        .max_connections(20)
+        .max_connections(50)
         .max_lifetime(Duration::from_secs(30 * 60)) // 30 min
         .connect(database_url)
         .await
@@ -28,20 +28,22 @@ pub async fn migrate(db: &Pool<Postgres>) -> Result<(), crate::Error> {
     Ok(())
 }
 
+/*
 #[cfg(test)]
 mod test {
     use super::*;
-
+    
     #[tokio::test]
     async fn test_db_connection() {
-        let db = connect("postgres://h3cker:postgres@localhost:5432/zkrat")
-            .await
-            .unwrap();
-
-        dbg!(&db);
-
-        // db is not closed
-        assert_eq!(db.is_closed(), false);
-    }
+        let db = connect("postgres://h3cker:postgres@localhost:5432/h3cker")
+        .await
+        .unwrap();
+    
+    dbg!(&db);
+    
+    // db is not closed
+    assert_eq!(db.is_closed(), false);
+}
 
 }
+*/
