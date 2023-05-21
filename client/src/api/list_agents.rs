@@ -7,7 +7,7 @@ impl Client {
         let get_agents_route = format!("{}/api/agents", config::SERVER_URL);
 
         let res = self.http_client.get(get_agents_route).send()?;
-        let api_res: api::Response<api::AgentsList> = res.json()?;
+        let api_res: api::Response<api::AgentList> = res.json()?;
 
         if let Some(err) = api_res.error {
             return Err(Error::Internal(err.message));

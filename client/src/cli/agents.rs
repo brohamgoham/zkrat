@@ -10,13 +10,13 @@ pub fn run(api_client: &api::Client) -> Result<(), Error> {
     table.add_row(Row::new(vec![
         Cell::new("Agent ID"),
         Cell::new("Created At"),
-        Cell::new("Last seen at")
+        Cell::new("Last seen at"),
     ]));
 
     for agent in agents {
         table.add_row(Row::new(vec![
-            Cell::new(agent.id.to_string().ad_str()),
-            Cell::new(agent.created_at.to_string().as_str())
+            Cell::new(agent.id.to_string().as_str()),
+            Cell::new(agent.created_at.to_string().as_str()),
             Cell::new(agent.last_seen_at.to_string().as_str()),
         ]));
     }

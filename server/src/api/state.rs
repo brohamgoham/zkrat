@@ -8,12 +8,12 @@ pub struct AppState {
 }
 
 impl AppState {
-    pub fn new(service: Service) -> AppState {
-        AppState { service }
+    pub fn new(service: Service) -> Self {
+        Self { service }
     }
 }
 
-pub fn with_state(
+pub fn with_states(
     state: Arc<AppState>,
 ) -> impl Filter<Extract = (Arc<AppState>,), Error = std::convert::Infallible> + Clone {
     {

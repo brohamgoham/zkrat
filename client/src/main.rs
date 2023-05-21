@@ -18,20 +18,20 @@ fn main() -> Result<(), anyhow::Error> {
                 .about("Your about to EXEC THIS COMMAND SONIC!!! >:0")
                 .arg(
                     Arg::new("agent")
-                        .short("s")
+                        .short('s')
                         .long("agent")
                         .help("the agent id yo execute the command on!")
                         .takes_value(true)
-                        .required(true)
+                        .required(true),
                 )
                 .arg(
                     Arg::new("command")
-                        .help("🦀Command🦀toExecute🦀withARGSZZ"),
+                        .help("🦀Command🦀toExecute🦀withARGSZZ")
                         .required(true)
-                        .index(1)
+                        .index(1),
                 ),
         )
-        arg_required_else_help(true)
+        .arg_required_else_help(true)
         .get_matches();
 
     let api_client = api::Client::new(config::SERVER_URL.to_string());
@@ -58,5 +58,4 @@ mod test {
     fn test_main() {
         assert_eq!(main(), Ok(()));
     }
-    
 }

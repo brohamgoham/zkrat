@@ -4,6 +4,9 @@ use std::{sync::Arc, time::Duration};
 use uuid::Uuid;
 use warp::{http::StatusCode, Rejection};
 
+/// 😈Create a New job for Agent
+/// takes in AppState which is using Arc Smart Pointer
+/// to Share State Between Threads 😈
 pub async fn create_job(
     state: Arc<AppState>,
     input: api::CreateJob,
@@ -18,6 +21,7 @@ pub async fn create_job(
     Ok(warp::reply::with_status(res_json, StatusCode::OK))
 }
 
+/// 😈Update Job Result 😈
 pub async fn post_job_result(
     state: Arc<AppState>,
     input: api::UpdateJobResult,

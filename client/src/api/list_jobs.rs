@@ -1,14 +1,14 @@
-use common::api;
+use common::api::{JobList, self};
 
 use super::Client;
 use crate::{config, Error};
 
 impl Client {
-    pub fn list(&self) -> Result<Vec<api::Job>, Error> {
+    pub fn list_jobs(&self) -> Result<Vec<api::Job>, Error> {
         let get_job_route = format!("{}/api/jobs", config::SERVER_URL);
 
         let res = self.http_client.get(get_job_route).send()?;
-        let api_res: api::Response<api::JobsList> = res.json()?;
+        let api_res: api::Response<JobList> = res.json()?;
 
         if let Some(err) = api_res.error {
             return Err(Error::Internal(err.message));

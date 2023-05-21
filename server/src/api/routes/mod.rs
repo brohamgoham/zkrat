@@ -1,4 +1,8 @@
-#[warn(opaque_hidden_inferred_bound)]
+#![warn(opaque_hidden_inferred_bound)]
+///! This is where the routes for the Server are defined.
+///! GET Reqeust to /api/jobs
+///! and POST Request to /api/jobs
+
 use agents::{get_agents, post_agents};
 use index::index;
 use jobs::{create_job, get_agent_job, get_job_result, get_jobs, post_job_result};
@@ -11,11 +15,13 @@ mod jobs;
 
 use super::AppState;
 
+/// Routes for Server component of zkRaT
+/// Contains GET and POST request to communicate with Agents
 pub fn routes(
     app_state: Arc<AppState>,
-) -> impl Filter<Extract = impl warp::Reply, Error = Infallible> + Clone {
+) -> impl Filter<Extract = impl warp::Reply + warp::generic::Tuple, Error = Infallible> + Clone {
     let api = warp::path("api");
-    let api_with_state = api.and(super::with_state(app_state));
+    let api_with_state = api.and(super::with_states(app_state));
 
     // Get /api
     let index = api.and(warp::path::end()).and(warp::get()).and_then(index);
@@ -37,6 +43,7 @@ pub fn routes(
         .and(warp::path::end())
         .and(warp::get())
         .and_then(get_job_result);
+
     // GET /api/agents
     let get_agents = api_with_state
         .clone()

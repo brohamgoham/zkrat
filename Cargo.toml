@@ -4,6 +4,7 @@ members = [
     "agent",
     "server",
     "common",
+    "client",
 ]
 
 [profile.release]

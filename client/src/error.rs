@@ -8,7 +8,7 @@ pub enum Error {
     NotFound(String),
 }
 
-impl std::conver::From<uuid::Error> Error {
+impl std::convert::From<uuid::Error> for Error {
     fn from(err: uuid::Error) -> Self {
         Error::Internal(err.to_string())
     }
@@ -19,4 +19,3 @@ impl std::convert::From<reqwest::Error> for Error {
         Error::Internal(err.to_string())
     }
 }
-
