@@ -27,3 +27,21 @@ pub async fn migrate(db: &Pool<Postgres>) -> Result<(), crate::Error> {
     }?;
     Ok(())
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[tokio::test]
+    async fn test_db_connection() {
+        let db = connect("postgres://h3cker:postgres@localhost:5432/zkrat")
+            .await
+            .unwrap();
+
+        dbg!(&db);
+
+        // db is not closed
+        assert_eq!(db.is_closed(), false);
+    }
+
+}

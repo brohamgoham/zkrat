@@ -50,12 +50,3 @@ fn main() -> Result<(), anyhow::Error> {
     Ok(())
 }
 
-#[cfg(test)]
-mod test {
-    use super::*;
-
-    #[test]
-    fn test_main() {
-        assert_eq!(main(), Ok(()));
-    }
-}

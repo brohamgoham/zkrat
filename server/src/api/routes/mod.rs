@@ -19,7 +19,7 @@ use super::AppState;
 /// Contains GET and POST request to communicate with Agents
 pub fn routes(
     app_state: Arc<AppState>,
-) -> impl Filter<Extract = impl warp::Reply + warp::generic::Tuple, Error = Infallible> + Clone {
+) -> impl Filter<Extract = impl warp::Reply, Error = Infallible> + Clone {
     let api = warp::path("api");
     let api_with_state = api.and(super::with_states(app_state));
 
