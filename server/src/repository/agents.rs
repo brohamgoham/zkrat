@@ -6,7 +6,7 @@ use uuid::Uuid;
 
 impl Repository {
     pub async fn create_agent(&self, db: &Pool<Postgres>, agent: &Agent) -> Result<(), Error> {
-        const QUERY: &str = "INSERT INTO agent
+        const QUERY: &str = "INSERT INTO agents
         (id, created_at, last_seen_at)
         VALUES ($1, $2, $3)";
 
