@@ -60,7 +60,7 @@ impl Repository {
         db: &Pool<Postgres>,
         agent_id: &Uuid,
     ) -> Result<Agent, Error> {
-        const QUERY: &str = "SELECT * FROM agents WHERE is = $1";
+        const QUERY: &str = "SELECT * FROM agents WHERE id = $1";
 
         match sqlx::query_as::<_, Agent>(QUERY)
             .bind(agent_id)
