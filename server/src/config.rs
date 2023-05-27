@@ -6,7 +6,6 @@ pub struct Config {
     pub database_url: String,
 }
 
-const ENV_DATABASE_URL: &str = "DATABASE_URL";
 const ENV_PORT: &str = "PORT";
 const DEFAULT_PORT: u16 = 8080;
 
@@ -18,7 +17,7 @@ impl Config {
             .ok()
             .map_or(Ok(DEFAULT_PORT), |env_val| env_val.parse())?;
 
-        let database_url = "postgres://h3cker:postgres@localhost:5432/h3cker".to_string();
+        let database_url = "postgres://h3cker:postgres@localhost:5432/zkrat".to_string();
         Ok(Config { port, database_url })
     }
 }
