@@ -25,3 +25,17 @@ pub fn run(api_client: &api::Client, agent_id: &str, command: &str) -> Result<()
 
     Ok(())
 }
+
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_run() {
+        let client = api::Client::new("http://localhost:8080".to_string());
+        let agent_id = "c7f31787-ef12-4548-a30a-73096347af64";
+        let command = "ls -la";
+        run(&client, agent_id, command).unwrap();
+    }
+}

@@ -15,18 +15,18 @@ fn main() -> Result<(), anyhow::Error> {
         .subcommand(Command::new(cli::JOBS).about("YOO LIST ALL JOBBB PLZZZ"))
         .subcommand(
             Command::new(cli::EXEC)
-                .about("Your about to EXEC THIS COMMAND SONIC!!! >:0")
+                .about(" 😈 Your about to EXEC THIS COMMAND SONIC!!! >:0")
                 .arg(
                     Arg::new("agent")
                         .short('s')
                         .long("agent")
-                        .help("the agent id yo execute the command on!")
-                        .takes_value(true)
-                        .required(true),
+                        .help("the agent id 🪪 yo execute the command on!")
+                        .required(true)
+                        .takes_value(true),
                 )
                 .arg(
                     Arg::new("command")
-                        .help("🦀Command🦀toExecute🦀withARGSZZ")
+                        .help("🦀 Command 🦀 to Execute 🦀 with ARGSZZ")
                         .required(true)
                         .index(1),
                 ),
@@ -42,7 +42,7 @@ fn main() -> Result<(), anyhow::Error> {
         cli::jobs::run(&api_client)?;
     } else if let Some(matches) = cli.subcommand_matches(cli::EXEC) {
         // safely unwrap cuz the args are a req
-        let agent_id = matches.value_of("agent_id").unwrap();
+        let agent_id = matches.value_of("agent").unwrap();
         let command = matches.value_of("command").unwrap();
         cli::exec::run(&api_client, agent_id, command)?;
     }
