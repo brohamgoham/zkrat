@@ -9,3 +9,7 @@
 - WebSockets 
 - Server Sent Events SSE
 - Long Polling
+
+
+### Todo
+- add E2EE 
