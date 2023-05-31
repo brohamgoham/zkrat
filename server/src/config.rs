@@ -22,9 +22,6 @@ impl Config {
     }
 }
 
-fn env_not_found(var: &str) -> Error {
-    Error::NotFound(format!("config: {} env var not found", var))
-}
 
 /*
 #[cfg(test)]
