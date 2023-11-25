@@ -7,7 +7,6 @@
 ## For Real time communication 
 - Short Polling
 - WebSockets 
-- Server Sent Events SSE
 - Long Polling
 
 
