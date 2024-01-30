@@ -9,6 +9,4 @@
 - WebSockets 
 - Long Polling
 
-
 ### Todo
-- add E2EE 
